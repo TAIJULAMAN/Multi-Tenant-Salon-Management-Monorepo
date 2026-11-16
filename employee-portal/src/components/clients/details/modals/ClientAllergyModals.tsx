@@ -1,0 +1,226 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { X, Trash2 } from "lucide-react";
+import CustomSelect from "@/components/customComponent/CustomSelect";
+import { AllergyItem } from "../tabs/ClientMedicalTab";
+
+interface AddAllergyModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onSave: (allergy: { title: string; description: string; severity: "High" | "Medium" | "Low" }) => void;
+}
+
+export function AddAllergyModal({ isOpen, onClose, onSave }: AddAllergyModalProps) {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [severity, setSeverity] = useState<"High" | "Medium" | "Low">("Medium");
+
+  if (!isOpen) return null;
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!title.trim()) return;
+    onSave({ title, description, severity });
+    setTitle("");
+    setDescription("");
+    setSeverity("Medium");
+    onClose();
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="bg-white rounded-2xl w-full max-w-[500px] p-6 shadow-2xl animate-in zoom-in-95 duration-200">
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-[1.1rem] font-bold text-[#1E293B] font-manrope">Add New Allergy</h3>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 flex items-center justify-center rounded-full bg-transparent text-[#64748B] hover:bg-[#F1F5F9] hover:text-[#1E293B] transition-colors cursor-pointer"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label className="block text-[12px] font-bold text-[#1E293B] mb-2">Title *</label>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="e.g. Fragrances Allergy"
+              required
+              className="w-full border border-[#E2E8F0] rounded-lg px-4 py-3 text-[13px] font-medium text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#635BFF] focus:ring-1 focus:ring-[#635BFF] transition-all"
+            />
+          </div>
+
+          <div>
+            <label className="block text-[12px] font-bold text-[#1E293B] mb-2">Description</label>
+            <textarea
+              rows={4}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Enter allergy details..."
+              className="w-full border border-[#E2E8F0] rounded-lg px-4 py-3 text-[13px] font-medium text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#635BFF] focus:ring-1 focus:ring-[#635BFF] transition-all resize-none"
+            />
+          </div>
+
+          <div>
+            <label className="block text-[12px] font-bold text-[#1E293B] mb-2">Severity *</label>
+            <CustomSelect
+              value={severity}
+              onChange={(val) => setSeverity(val as "High" | "Medium" | "Low")}
+              options={["Low", "Medium", "High"]}
+              buttonClassName="w-full h-11 px-4 text-[13px] font-medium text-[#1E293B] bg-white border border-[#E2E8F0] rounded-lg"
+            />
+          </div>
+
+          <div className="flex justify-end pt-2">
+            <button
+              type="submit"
+              className="bg-[#635BFF] text-white px-6 py-2.5 rounded-lg text-[13px] font-bold hover:bg-[#524be0] transition-colors shadow-sm cursor-pointer"
+            >
+              Save Allergy
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+interface EditAllergyModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  allergy: AllergyItem | null;
+  onSave: (updated: AllergyItem) => void;
+}
+
+export function EditAllergyModal({ isOpen, onClose, allergy, onSave }: EditAllergyModalProps) {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [severity, setSeverity] = useState<"High" | "Medium" | "Low">("Medium");
+
+  useEffect(() => {
+    if (allergy) {
+      setTitle(allergy.title);
+      setDescription(allergy.description);
+      setSeverity(allergy.severity);
+    }
+  }, [allergy]);
+
+  if (!isOpen || !allergy) return null;
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!title.trim()) return;
+    onSave({ ...allergy, title, description, severity });
+    onClose();
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="bg-white rounded-2xl w-full max-w-[500px] p-6 shadow-2xl animate-in zoom-in-95 duration-200">
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-[1.1rem] font-bold text-[#1E293B] font-manrope">Edit Allergy</h3>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 flex items-center justify-center rounded-full bg-transparent text-[#64748B] hover:bg-[#F1F5F9] hover:text-[#1E293B] transition-colors cursor-pointer"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label className="block text-[12px] font-bold text-[#1E293B] mb-2">Title *</label>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+              className="w-full border border-[#E2E8F0] rounded-lg px-4 py-3 text-[13px] font-medium text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#635BFF] focus:ring-1 focus:ring-[#635BFF] transition-all"
+            />
+          </div>
+
+          <div>
+            <label className="block text-[12px] font-bold text-[#1E293B] mb-2">Description</label>
+            <textarea
+              rows={4}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className="w-full border border-[#E2E8F0] rounded-lg px-4 py-3 text-[13px] font-medium text-[#1E293B] placeholder-[#94A3B8] focus:outline-none focus:border-[#635BFF] focus:ring-1 focus:ring-[#635BFF] transition-all resize-none"
+            />
+          </div>
+
+          <div>
+            <label className="block text-[12px] font-bold text-[#1E293B] mb-2">Severity *</label>
+            <CustomSelect
+              value={severity}
+              onChange={(val) => setSeverity(val as "High" | "Medium" | "Low")}
+              options={["Low", "Medium", "High"]}
+              buttonClassName="w-full h-11 px-4 text-[13px] font-medium text-[#1E293B] bg-white border border-[#E2E8F0] rounded-lg"
+            />
+          </div>
+
+          <div className="flex justify-end gap-3 pt-2">
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-5 py-2.5 rounded-lg border border-[#E2E8F0] text-[13px] font-bold text-[#64748B] hover:bg-[#F8FAFC] transition-colors cursor-pointer"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="bg-[#635BFF] text-white px-6 py-2.5 rounded-lg text-[13px] font-bold hover:bg-[#524be0] transition-colors shadow-sm cursor-pointer"
+            >
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+interface DeleteAllergyModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  allergy: AllergyItem | null;
+  onConfirm: () => void;
+}
+
+export function DeleteAllergyModal({ isOpen, onClose, allergy, onConfirm }: DeleteAllergyModalProps) {
+  if (!isOpen || !allergy) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="bg-white rounded-2xl w-full max-w-[440px] p-6 shadow-2xl animate-in zoom-in-95 duration-200 text-center">
+        <div className="w-12 h-12 rounded-full bg-[#FEE2E2] flex items-center justify-center text-[#EF4444] mx-auto mb-4">
+          <Trash2 className="w-6 h-6" />
+        </div>
+        <h3 className="text-[1.1rem] font-bold text-[#1E293B] font-manrope mb-2">Delete Allergy</h3>
+        <p className="text-[13px] text-[#64748B] mb-6 leading-relaxed">
+          Are you sure you want to delete <span className="font-bold text-[#1E293B]">{allergy.title}</span>? This action cannot be undone.
+        </p>
+        <div className="flex items-center justify-center gap-3">
+          <button
+            type="button"
+            onClick={onClose}
+            className="px-5 py-2.5 rounded-lg border border-[#E2E8F0] text-[13px] font-bold text-[#64748B] hover:bg-[#F8FAFC] transition-colors cursor-pointer"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            onClick={onConfirm}
+            className="px-6 py-2.5 text-sm font-bold text-white bg-[#EF4444] hover:bg-[#DC2626] shadow-sm shadow-[#EF4444]/20 rounded-lg transition-colors cursor-pointer"
+          >
+            Yes, Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}

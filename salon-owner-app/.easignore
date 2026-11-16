@@ -1,0 +1,48 @@
+# Dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Git & IDEs
+.git/
+.vscode/
+.idea/
+.claude/
+
+# macOS / Windows
+.DS_Store
+Thumbs.db
+*.pem
+
+# Logs & Debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+*.log
+
+# Sensitive Keys & Certs (Managed by EAS Credentials)
+*.jks
+*.keystore
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Native Build Artifacts & Caches
+.kotlin/
+*.orig.*
+android/build/
+android/app/build/
+android/.gradle/
+ios/build/
+ios/Pods/
+
+# Typescript
+*.tsbuildinfo
+
+# Local env files
+.env*.local
