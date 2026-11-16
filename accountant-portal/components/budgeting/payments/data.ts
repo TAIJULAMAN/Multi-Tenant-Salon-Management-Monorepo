@@ -1,0 +1,151 @@
+import { Activity, FileText, AlertCircle } from "lucide-react";
+
+import type { PaymentItem, ImportedPaymentItem, PaymentStatus, ReceiptIssueStatus } from "./types";
+export type { PaymentItem, ImportedPaymentItem, PaymentStatus, ReceiptIssueStatus };
+
+export const paymentsMetrics = {
+  totalSales: 643,
+  paidWithReceipt: 428,
+  notPaidNoReceipt: 565,
+  paymentsCount: 5
+};
+
+export const metricCards = [
+  {
+    title: "Total Sales",
+    value: `€ ${paymentsMetrics.totalSales}`,
+    subtitle: `${paymentsMetrics.paymentsCount} payments total`,
+    icon: Activity,
+    bgColor: "bg-gradient-to-b from-[#5c60f5]/[0.13] to-[#5c60f5]/[0.03]",
+    iconBgColor: "bg-[#5c60f5]",
+  },
+  {
+    title: "Paid with Receipt Sales",
+    value: `€ ${paymentsMetrics.paidWithReceipt}`,
+    subtitle: "Payments with completed receipt",
+    icon: FileText,
+    bgColor: "bg-gradient-to-b from-[#10b981]/[0.13] to-[#10b981]/[0.03]",
+    iconBgColor: "bg-[#10b981]",
+  },
+  {
+    title: "Not Paid / No Receipt",
+    value: `€ ${paymentsMetrics.notPaidNoReceipt}`,
+    subtitle: "Sales on credit or without receipt",
+    icon: AlertCircle,
+    bgColor: "bg-gradient-to-b from-[#facc15]/[0.13] to-[#facc15]/[0.03]",
+    iconBgColor: "bg-[#facc15]",
+  },
+];
+
+export const filterOptions = {
+  methods: ["All", "Cash", "Card Terminal", "Gift Card", "Online Payment"],
+  paymentStatus: ["All", "Fully Paid", "Half Paid", "Not Paid"],
+  receiptStatus: ["All", "Completed", "Half Completed", "Not Issued"]
+};
+
+export const paginationOptions = ["5", "10", "20"];
+
+export const mockPayments: PaymentItem[] = [
+  {
+    id: "#000",
+    paymentDate: "5 Aug 2025, 12:30",
+    client: { name: "Maria Rodriguez", email: "maria@beautywellness.com" },
+    teamMember: { name: "Maria Rodriguez", email: "maria@beautywellness.com" },
+    salon: "Glamour Beauty",
+    method: "Cash",
+    status: "Fully Paid",
+    receiptIssue: "Completed"
+  },
+  {
+    id: "#001",
+    paymentDate: "5 Aug 2025, 12:30",
+    client: { name: "Maria Rodriguez", email: "maria@beautywellness.com" },
+    teamMember: { name: "Maria Rodriguez", email: "maria@beautywellness.com" },
+    salon: "Style Studio",
+    method: "Card Terminal",
+    status: "Fully Paid",
+    receiptIssue: "Not Issued"
+  },
+  {
+    id: "#002",
+    paymentDate: "5 Aug 2025, 12:30",
+    client: { name: "Maria Rodriguez", email: "maria@beautywellness.com" },
+    teamMember: { name: "Maria Rodriguez", email: "maria@beautywellness.com" },
+    salon: "Style Studio",
+    method: "Gift Card",
+    status: "Half Paid",
+    receiptIssue: "Half Printed"
+  },
+  {
+    id: "#003",
+    paymentDate: "5 Aug 2025, 12:30",
+    client: { name: "Maria Rodriguez", email: "maria@beautywellness.com" },
+    teamMember: { name: "Maria Rodriguez", email: "maria@beautywellness.com" },
+    salon: "Style Studio",
+    method: "Online Payment",
+    status: "Not Paid",
+    receiptIssue: "Not Issued"
+  },
+  {
+    id: "#004",
+    paymentDate: "5 Aug 2025, 12:30",
+    client: { name: "Maria Rodriguez", email: "maria@beautywellness.com" },
+    teamMember: { name: "Maria Rodriguez", email: "maria@beautywellness.com" },
+    salon: "Glamour Beauty",
+    method: "Online Payment",
+    status: "Not Paid",
+    receiptIssue: "Not Issued"
+  },
+  {
+    id: "#005",
+    paymentDate: "5 Aug 2025, 12:30",
+    client: { name: "Maria Rodriguez", email: "maria@beautywellness.com" },
+    teamMember: { name: "Maria Rodriguez", email: "maria@beautywellness.com" },
+    salon: "Style Studio",
+    method: "Cash",
+    status: "Half Paid",
+    receiptIssue: "Half Printed"
+  },
+  {
+    id: "#006",
+    paymentDate: "5 Aug 2025, 12:30",
+    client: { name: "Maria Rodriguez", email: "maria@beautywellness.com" },
+    teamMember: { name: "Maria Rodriguez", email: "maria@beautywellness.com" },
+    salon: "Glamour Beauty",
+    method: "Gift Card",
+    status: "Fully Paid",
+    receiptIssue: "Completed"
+  },
+  {
+    id: "#007",
+    paymentDate: "5 Aug 2025, 12:30",
+    client: { name: "Maria Rodriguez", email: "maria@beautywellness.com" },
+    teamMember: { name: "Maria Rodriguez", email: "maria@beautywellness.com" },
+    salon: "Style Studio",
+    method: "Card Terminal",
+    status: "Fully Paid",
+    receiptIssue: "Completed"
+  },
+  {
+    id: "#008",
+    paymentDate: "5 Aug 2025, 12:30",
+    client: { name: "Maria Rodriguez", email: "maria@beautywellness.com" },
+    teamMember: { name: "Maria Rodriguez", email: "maria@beautywellness.com" },
+    salon: "Glamour Beauty",
+    method: "Card Terminal",
+    status: "Fully Paid",
+    receiptIssue: "Completed"
+  }
+];
+
+export const mockImportedPayments: ImportedPaymentItem[] = [
+  { id: "#001", receiptNumber: "7891234567895", date: "02/01/2025", clientRef: "#001", total: 270, vat: 70, discount: 70, paymentMethod: "Cash" },
+  { id: "#002", receiptNumber: "7891234567896", date: "02/01/2025", clientRef: "#001", total: 270, vat: 70, discount: 70, paymentMethod: "Credit Card" },
+  { id: "#003", receiptNumber: "7891234567895", date: "02/01/2025", clientRef: "#001", total: 270, vat: 70, discount: 70, paymentMethod: "Online Payment" },
+  { id: "#004", receiptNumber: "7891234567895", date: "02/01/2025", clientRef: "#001", total: 270, vat: 70, discount: 70, paymentMethod: "Cash" },
+  { id: "#005", receiptNumber: "7891234567895", date: "02/01/2025", clientRef: "#001", total: 270, vat: 70, discount: 70, paymentMethod: "Cash" },
+  { id: "#006", receiptNumber: "7891234567896", date: "02/01/2025", clientRef: "#001", total: 270, vat: 70, discount: 70, paymentMethod: "Credit Card" },
+  { id: "#007", receiptNumber: "7891234567895", date: "02/01/2025", clientRef: "#001", total: 270, vat: 70, discount: 70, paymentMethod: "Online Payment" },
+  { id: "#008", receiptNumber: "7891234567895", date: "02/01/2025", clientRef: "#001", total: 270, vat: 70, discount: 70, paymentMethod: "Online Payment" },
+  { id: "#009", receiptNumber: "7891234567895", date: "02/01/2025", clientRef: "#001", total: 270, vat: 70, discount: 70, paymentMethod: "Cash" }
+];

@@ -1,0 +1,80 @@
+import { RecordShift } from "./types";
+
+export const MONTHS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+export const YEARS = ["2023", "2024", "2025", "2026"];
+
+export const SCHEDULE_TYPES = [
+  "Regular Shift",
+  "Overtime",
+  "Weekend Shift",
+  "Part Time",
+  "Night Shift",
+];
+
+export const INITIAL_RECORD_SHIFTS: RecordShift[] = [
+  {
+    id: "1",
+    date: "Dec 01, 2024",
+    dayOfWeek: "Sunday",
+    scheduleType: "Regular Shift",
+    shiftsCount: 1,
+    timeIn: "09:00",
+    timeOut: "18:00",
+    breakDuration: "1h",
+    hoursWorked: "8h",
+    dailyTotal: "8h",
+    month: "December",
+    year: "2024",
+    rawDate: "2024-12-01",
+    status: "Approved",
+    notes: "Styling & coloring appointments",
+  },
+  {
+    id: "2",
+    date: "Dec 02, 2024",
+    dayOfWeek: "Monday",
+    scheduleType: "Regular Shift",
+    shiftsCount: 1,
+    timeIn: "09:00",
+    timeOut: "18:00",
+    breakDuration: "1h",
+    hoursWorked: "8h",
+    dailyTotal: "8h",
+    month: "December",
+    year: "2024",
+    rawDate: "2024-12-02",
+    status: "Approved",
+    notes: "Hair treatments and bridal consultation",
+  },
+  {
+    id: "3",
+    date: "Dec 03, 2024",
+    dayOfWeek: "Tuesday",
+    scheduleType: "Regular Shift",
+    shiftsCount: 1,
+    timeIn: "09:00",
+    timeOut: "18:00",
+    breakDuration: "1h",
+    hoursWorked: "8h",
+    dailyTotal: "8h",
+    month: "December",
+    year: "2024",
+    rawDate: "2024-12-03",
+    status: "Pending",
+    notes: "Full day styling and inventory audit",
+  },
+];

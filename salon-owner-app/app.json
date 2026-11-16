@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "saloon-owner-app",
+    "slug": "saloon-owner-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/app/appIcon.png",
+    "scheme": "saloonownerapp",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "icon": "./assets/app/appIcon.png"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#635BFF",
+        "foregroundImage": "./assets/app/appIcon.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "package": "com.mohammadalasad.haremapp"
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+            "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#635BFF",
+          "image": "./assets/app/appIcon.png",
+          "imageWidth": 76
+        }
+      ],
+      "expo-font"
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    }
+  }
+}
